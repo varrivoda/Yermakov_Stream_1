@@ -1,14 +1,16 @@
 package example;
 
 import java.util.List;
+//import java.util.ArrayList;
+
 import static example.Funs.*;
 
 public class Main{
-//	List<String> lst = new ArrayList("aa", "bb");
 	
 	public static void main(String[] args) throws Exception {
+		List<String> lst = List.of("aa", "bb");
 		System.out.println(
-			action((x,y)->x+y, "aa", "bb")
+			action((x,y)->x+y, lst)
 		);
 	}
 }
