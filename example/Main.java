@@ -6,9 +6,9 @@ import static example.Funs.*;
 public class Main{
 //	List<String> lst = new ArrayList("aa", "bb");
 	
-	public static void main(String[] args){
+	public static void main(String[] args) throws Exception {
 		System.out.println(
-			action('-', 10, 2, action('+', 3, 3))
+			action((x, y)->x-y, 10, 2, action((x,y)->x+y, 3, 3))
 		);
 	}
 }
