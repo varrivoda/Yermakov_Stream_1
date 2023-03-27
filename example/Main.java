@@ -8,7 +8,7 @@ public class Main{
 	
 	public static void main(String[] args) throws Exception {
 		System.out.println(
-			action((x, y)->x-y, 10, 2, action((x,y)->x+y, 3, 3))
+			action((x,y)->x+y, "aa", "bb")
 		);
 	}
 }

@@ -1,12 +1,12 @@
 package example;
 
-interface Action{
-	int act(int x, int y);
-}
+interface Action<T>{
+	T act(T x, T y);
+} 
 
 public class Funs{
-	public static int action(Action action, int ...args){
-		int res=args[0];
+	public static<T> T action(Action<T> action, T ...args){
+		T res=args[0];
 		for (int i=1;i<args.length; i++)	res=action.act(res, args[i]);
 		return res;
 	}
