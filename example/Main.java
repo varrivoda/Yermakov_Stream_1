@@ -11,7 +11,7 @@ public class Main{
 		List<String> lst = List.of("aa", "bb");
 		
 		System.out.println(
-			reduce((x,y)->x+y, lst)
+			reduce("", lst, (x,y)->x+y)
 		);
 	}
 }

@@ -2,14 +2,14 @@ package example;
 
 import java.util.List;
 
-interface Reduction<T>{
-	T reduce(T x, T y);
+interface Reduction<T,R>{
+	R reduce(R x, T y);
 } 
 
 public class Funs{
-	public static<T> T reduce(Reduction<T> reduction, List<T> args){
-		T res=args.get(0);
-		for (int i=1;i<args.size(); i++)	res=reduction.reduce(res, args.get(i));
+	public static<T,R> R reduce(R startVal, List<T> args, Reduction<T,R> reduction){
+		R res = startVal;
+		for (int i=0;i<args.size(); i++)	res=reduction.reduce(res, args.get(i));
 		return res;
 	}
 	
