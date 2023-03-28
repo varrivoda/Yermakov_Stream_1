@@ -11,10 +11,16 @@ interface Usloviye<T>{
 	boolean fit(T x);
 }
 
+interface Changer<T,R>{
+	R change(T x);
+}
+
 public class Funs{
-	public static<T,R> R reduce(R startVal, List<T> args, Reduction<T,R> reduction){
-		R res = startVal;
-		for (int i=0;i<args.size(); i++)	res=reduction.reduce(res, args.get(i));
+	
+	public static <T,R> List<R> map(List<T> args, Changer<T,R> changer){
+		List<R> res = new ArrayList<>();
+		for(T arg:args) 
+			res.add(changer.change(arg));
 		return res;
 	}
 	
@@ -26,14 +32,9 @@ public class Funs{
 		return res;
 	}
 	
-	/*
-	public static int men(int ...args){
-		int res=args[0];
-		for(int i=1;i<args.length; i++){
-			res-=args[i];
-		}
+	public static<T,R> R reduce(R startVal, List<T> args, Reduction<T,R> reduction){
+		R res = startVal;
+		for (int i=0;i<args.size(); i++)	res=reduction.reduce(res, args.get(i));
 		return res;
 	}
-	*/	
-	
 }

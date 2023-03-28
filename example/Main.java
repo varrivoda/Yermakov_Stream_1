@@ -11,7 +11,7 @@ public class Main{
 		List<String> lst = List.of("aa", "bb", "wwwww", "vvvvvv");
 		
 		System.out.println(
-			reduce("", filter(lst, x->x.length()>3), (x,y)->x+y)
+			reduce(0, map(filter(lst, x->x.length()>3), x->x.length()), (x,y)->x+y)
 		);
 	}
 }
