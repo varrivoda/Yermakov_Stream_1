@@ -3,8 +3,8 @@ package example;
 import java.util.List;
 import java.util.ArrayList;
 
-interface Reduction<T,R>{
-	R reduce(R x, T y);
+interface Reduction<T>{
+	T reduce(T x, T y);
 } 
 
 interface Usloviye<T>{
@@ -32,8 +32,8 @@ public class Funs{
 		return res;
 	}
 	
-	public static<T,R> R reduce(R startVal, List<T> args, Reduction<T,R> reduction){
-		R res = startVal;
+	public static<T> T reduce(T startVal, List<T> args, Reduction<T> reduction){
+		T res = startVal;
 		for (int i=0;i<args.size(); i++)	res=reduction.reduce(res, args.get(i));
 		return res;
 	}

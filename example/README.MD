@@ -166,3 +166,36 @@ static<T,R> List<R> map(List<T> args, Changer<T,R> changer)
 однако если мы передадим в reduce в качестве стартового значения 0
 	reduce(0, map(filter(lst, x->x.length()>3), x->x.length()), (x,y)->x+y)
 то получим результат сложения чисел 5 и 6, то есть 11 :) 
+
+
+#9 Reduce возвращает T
+у нас и reduce и map возвращают измененный тип R
+стало быть, у reduce это лишнее действие, т к сначала мы можем замапить на определенный тип
+правда,вопрос - как в Мап передавать startValue? (и зачем...т.екак это объъяснить?:) 
+
+короче, убираем лишние ,R> из интерфейса и самого метода. Было:
+
+//...
+interface Reduction<T,R>{
+	R reduce(R x, T y);
+} 
+//...
+public static<T,R> R reduce(R startVal, List<T> args, Reduction<T,R> reduction){
+	R res = startVal;
+	for (int i=0;i<args.size(); i++)	res=reduction.reduce(res, args.get(i));
+	return res;
+}
+//..
+
+стартВал в reduce пока оставим.
+
+в итоге мы получили, что складывать как строки нельзя
+и обязательно нужно попасть типом стартового значения в тип результата редукции
+
+иначе ошибка Ictompatible types
+
+т е работает только при передаче числа в СтартВал
+либо если передаем пустуюстроку,то вынкждены писать в Мапе 
+x->Integer.valueOf(x.length()).toString()
+
+...чтото непонятное произошло
