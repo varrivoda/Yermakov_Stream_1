@@ -15,24 +15,29 @@ interface Changer<T,R>{
 	R change(T x);
 }
 
-public class Funs{
+public class Funs<T>{
+	List<T> args;
 	
-	public static <T,R> List<R> map(List<T> args, Changer<T,R> changer){
+	public Funs(List<T> args){
+		this.args = args;
+	}
+	
+	public <R> Funs<R> map(Changer<T,R> changer){
 		List<R> res = new ArrayList<>();
 		for(T arg:args) 
 			res.add(changer.change(arg));
-		return res;
+		return new Funs(res);
 	}
 	
-	public static <T> List<T> filter(List<T> args, Usloviye<T> usloviye){
+	public Funs<T> filter(Usloviye<T> usloviye){
 		List<T> res = new ArrayList<T>();
 		for(T arg:args) 
 			if(usloviye.fit(arg)) 
 				res.add(arg);
-		return res;
+		return new Funs(res);
 	}
 	
-	public static<T> T reduce(T startVal, List<T> args, Reduction<T> reduction){
+	public T reduce(T startVal, Reduction<T> reduction){
 		T res = startVal;
 		for (int i=0;i<args.size(); i++)	res=reduction.reduce(res, args.get(i));
 		return res;

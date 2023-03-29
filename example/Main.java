@@ -11,7 +11,21 @@ public class Main{
 		List<String> lst = List.of("aa", "bb", "wwwww", "vvvvvv");
 		
 		System.out.println(
-			reduce("", map(filter(lst, x->x.length()>3), x->Integer.valueOf(x.length()).toString()), (x,y)->x+y)
+			new Funs<>(lst)
+				.filter(x->x.length()>3)
+				.map(x->Integer.valueOf(x.length()).toString())
+				.reduce("", (x,y)->x+y)
+		);	
+		
+/*		reduce("", 
+				map(
+					filter(lst, x->x.length()>3), 
+					x->Integer.valueOf(x.length()).toString()
+				), 
+				(x,y)->x+y
+			)
 		);
+*/
+
 	}
 }
